@@ -1,5 +1,6 @@
 package com.example.login.data.services
 
+import com.example.login.data.requests.PesoRequest
 import com.example.login.data.requests.UsersRequest
 import com.example.login.data.responses.DefaultReponse
 import com.example.login.data.responses.UserResponse
@@ -10,6 +11,8 @@ interface ApiService  {
     @Headers("Accept:application/json", "Content-Type:application/json")
     @GET("/")
     fun getListEmployees(): Call<UserResponse>
+    @POST("/add_peso")
+    fun addPeso(@Body request: PesoRequest): Call<DefaultReponse>
     @POST("/add_login")
     fun addEmployee(@Body request: UsersRequest): Call<DefaultReponse>
     @POST("/auth")
