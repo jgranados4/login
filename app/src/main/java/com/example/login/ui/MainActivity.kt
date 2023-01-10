@@ -1,5 +1,6 @@
 package com.example.login.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 Addlogin()
             }
+
         }
     }
 
@@ -65,6 +67,10 @@ class MainActivity : AppCompatActivity() {
                     if ( defaultResponse!= null) {
                         if (response.code()==200 && defaultResponse.error==false){
                             MyMessages.toast(applicationContext,defaultResponse.message)
+                            val Ventanaw= Intent(this@MainActivity, VentanaNew::class.java).
+                            putExtra("Nombre","juan")
+
+                            startActivity(Ventanaw)
                             return
                         }
                     }else{

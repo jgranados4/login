@@ -6,12 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".ui.VentanaNew">
 
+    <Button
+        android:id="@+id/btnRegresar"
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="96dp"
+        android:drawableLeft="@android:drawable/ic_menu_revert"
+        android:onClick="regresar"
+        android:text="Regresar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPeso" />
+
+    <EditText
+        android:id="@+id/txtPeso"
+        android:layout_width="270dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="236dp"
+        android:ems="10"
+        android:hint="Ingrese su peso actual"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="56dp"
+        android:drawableLeft="@android:drawable/ic_menu_save"
+        android:onClick="guardarRegistro"
+        android:text="Guardar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegresar" />
+
     <TextView
-        android:id="@+id/UsernameL"
-        android:layout_width="110dp"
-        android:layout_height="61dp"
-        android:text="Username"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="150dp"
-        tools:layout_editor_absoluteY="255dp" />
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="236dp"
+        android:layout_marginBottom="468dp"
+        android:fontFamily="sans-serif"
+        android:text="Peso:"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.login.R
 import com.example.login.data.models.Users
 import com.example.login.ui.MainActivity
+import com.example.login.ui.VentanaNew
 import com.example.login.util.MyMessages
 
 open class MyViewHolderUser(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -14,15 +15,15 @@ open class MyViewHolderUser(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     fun bind(use: Users) {
 
-        usename = itemView.findViewById(R.id.UsernameL)
-
-        usename.text = use?.username
+//        usename = itemView.findViewById(R.id.UsernameL)
+//
+//        usename.text = use?.username
 
 
         itemView.setOnClickListener {
             MyMessages.toast(itemView.context, use?.username.toString())
-            val intent = Intent(itemView.context, MainActivity::class.java)
-            intent.putExtra("per_id", usename.id)
+            val intent = Intent(itemView.context, VentanaNew::class.java)
+//            intent.putExtra("per_id", usename.id)
             itemView.context.startActivity(intent)
         }
     }
