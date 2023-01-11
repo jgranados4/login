@@ -3,9 +3,11 @@ package com.example.login.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.example.login.R
+import com.example.login.data.requests.RegisRequest
 import com.example.login.data.requests.UsersRequest
 import com.example.login.data.responses.DefaultReponse
 import com.example.login.data.services.ApiClient
@@ -18,41 +20,47 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class Registrar : AppCompatActivity() {
+    lateinit var TxtFullName: EditText
+    lateinit var TxtEmail:EditText
     lateinit var TxtUsername: EditText
     lateinit var TxtPassword: EditText
-    lateinit var BtnLogin: Button
-    lateinit var BtnRegistar:Button
+    lateinit var BtnRegistrar: Button
     lateinit var apiClient: ApiClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_registrar)
         apiClient = ApiClient()
-        TxtUsername = findViewById(R.id.Username)
-        TxtPassword = findViewById(R.id.Password)
-        BtnLogin = findViewById(R.id.Login)
-        BtnRegistar=findViewById(R.id.ReGI)
-        BtnRegistar.setOnClickListener{
-            val Regist =Intent(this@MainActivity,Registrar::class.java).apply {
-                putExtra("Nombre","juan")
-            }
-            startActivity(Regist)
-        }
-
-
-
-        BtnLogin.setOnClickListener {
+        TxtFullName=findViewById(R.id.Rname)
+        TxtEmail=findViewById(R.id.Remail)
+        TxtUsername=findViewById(R.id.Reusername)
+        TxtPassword=findViewById(R.id.Repassword)
+        BtnRegistrar=findViewById(R.id.Registrar)
+        BtnRegistrar.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch {
-                Addlogin()
+                AddRegistrado()
             }
-
         }
     }
-
-    private suspend fun Addlogin() {
+    private suspend fun AddRegistrado() {
+        val FullName=TxtFullName.text.toString().trim()
+        val Email=TxtEmail.text.toString().trim()
         val Username = TxtUsername.text.toString().trim()
         val Password = TxtPassword.text.toString().trim()
-
+        if (FullName.isEmpty()) {
+            withContext(Dispatchers.Main) {
+                TxtFullName.error = "Ingrese el Full Name"
+                TxtFullName.requestFocus()
+            }
+            return
+        }
+        if (Email.isEmpty()) {
+            withContext(Dispatchers.Main) {
+                TxtEmail.error = "Ingrese el Email"
+                TxtEmail.requestFocus()
+            }
+            return
+        }
         if (Username.isEmpty()) {
             withContext(Dispatchers.Main) {
                 TxtUsername.error = "Ingrese el Username"
@@ -67,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             }
             return
         }
-        apiClient.getApiService(this).Auth(UsersRequest(Username, Password ))
+        apiClient.getApiService(this).addEmployee(RegisRequest(FullName,Email,Username, Password ))
             .enqueue(object: Callback<DefaultReponse> {
                 override fun onResponse(
                     call: Call<DefaultReponse>,
@@ -77,10 +85,7 @@ class MainActivity : AppCompatActivity() {
                     if ( defaultResponse!= null) {
                         if (response.code()==200 && defaultResponse.error==false){
                             MyMessages.toast(applicationContext,defaultResponse.message)
-                            val Ventanaw= Intent(this@MainActivity, VentanaNew::class.java).
-                            putExtra("Nombre","juan")
 
-                            startActivity(Ventanaw)
                             return
                         }
                     }else{
@@ -94,5 +99,9 @@ class MainActivity : AppCompatActivity() {
 
             })
     }
-
+    fun regresar(view: View) {
+        finish()
+        //val intent = Intent(this, MainActivity::class.java)
+        //startActivity(intent)
+    }
 }
