@@ -61,6 +61,10 @@ class VentanaNew : AppCompatActivity() {
                     if ( defaultResponse!= null) {
                         if (response.code()==200 && defaultResponse.error==false){
                             MyMessages.toast(applicationContext,defaultResponse.message)
+                            val Ventanaw= Intent(this@VentanaNew, MainActivity::class.java).
+                            putExtra("Nombre","juan")
+
+                            startActivity(Ventanaw)
 
                             return
                         }

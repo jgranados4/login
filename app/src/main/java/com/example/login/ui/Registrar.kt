@@ -85,6 +85,10 @@ class Registrar : AppCompatActivity() {
                     if ( defaultResponse!= null) {
                         if (response.code()==200 && defaultResponse.error==false){
                             MyMessages.toast(applicationContext,defaultResponse.message)
+                            val Ventanaw= Intent(this@Registrar, VentanaNew::class.java).
+                            putExtra("Nombre","juan")
+
+                            startActivity(Ventanaw)
 
                             return
                         }
